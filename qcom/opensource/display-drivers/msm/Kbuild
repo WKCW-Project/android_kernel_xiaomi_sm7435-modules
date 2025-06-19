@@ -74,6 +74,10 @@ CDEFINES +=	-DANI_LITTLE_BYTE_ENDIAN \
 	-Werror\
 	-D__linux__
 
+ifeq (1, $(strip $(CONFIG_DISPLAY_FACTORY_BUILD)))
+CDEFINES +=	-DDISPLAY_FACTORY_BUILD
+endif
+
 KBUILD_CPPFLAGS += $(CDEFINES)
 
 ccflags-y += $(LINUX_INC)
