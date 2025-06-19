@@ -4102,6 +4102,7 @@ static int wcd938x_soc_codec_probe(struct snd_soc_component *component)
 			return ret;
 		}
 	}
+/* register codec hardware */
 	return ret;
 
 err_hwdep:

@@ -296,7 +296,7 @@ static int spf_core_probe(struct gpr_device *adev)
 	if (spf_core_priv->is_initial_boot)
 		schedule_work(&spf_core_priv->add_chld_dev_work);
 	mutex_unlock(&spf_core_priv->lock);
-
+	/* register adsp hardware */
 	return 0;
 }
 
