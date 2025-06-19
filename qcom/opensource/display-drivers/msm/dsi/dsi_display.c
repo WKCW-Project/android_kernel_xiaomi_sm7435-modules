@@ -817,7 +817,8 @@ static void dsi_display_set_cmd_tx_ctrl_flags(struct dsi_display *display,
 				flags |= DSI_CTRL_CMD_ASYNC_WAIT;
 
 		/* video panel update 51 use async wait*/
-		if (mi_get_panel_id(display->panel->mi_cfg.mi_panel_id) == N16_PANEL_PB ||
+		if (mi_get_panel_id(display->panel->mi_cfg.mi_panel_id) == N16_PANEL_PC ||
+			mi_get_panel_id(display->panel->mi_cfg.mi_panel_id) == N16_PANEL_PB ||
 			mi_get_panel_id(display->panel->mi_cfg.mi_panel_id) == N16_PANEL_PA) {
 			buf = (u8 *)msg->tx_buf;
 			if ((buf && buf[0] == MIPI_DCS_SET_DISPLAY_BRIGHTNESS)) {
@@ -1477,7 +1478,8 @@ int dsi_display_set_power(struct drm_connector *connector,
 		if ((display->panel->power_mode == SDE_MODE_DPMS_LP1) ||
 			(display->panel->power_mode == SDE_MODE_DPMS_LP2)) {
 			rc = dsi_panel_set_nolp(display->panel);
-			if (mi_get_panel_id(display->panel->mi_cfg.mi_panel_id) == N16_PANEL_PB)
+			if (mi_get_panel_id(display->panel->mi_cfg.mi_panel_id) == N16_PANEL_PC ||
+				mi_get_panel_id(display->panel->mi_cfg.mi_panel_id) == N16_PANEL_PB)
 				mi_dsi_panel_set_flat_mode(display->panel, false);
 		}
 		break;
@@ -7448,7 +7450,8 @@ int dsi_display_get_modes(struct dsi_display *display,
 			if (mi_get_panel_id_by_dsi_panel(display->panel) == M16T_PANEL_PA ||
 				mi_get_panel_id_by_dsi_panel(display->panel) == M16T_PANEL_PB ||
 				mi_get_panel_id_by_dsi_panel(display->panel) == N16_PANEL_PA ||
-				mi_get_panel_id_by_dsi_panel(display->panel) == N16_PANEL_PB) {
+				mi_get_panel_id_by_dsi_panel(display->panel) == N16_PANEL_PB ||
+				mi_get_panel_id_by_dsi_panel(display->panel) == N16_PANEL_PC) {
 				if (sub_mode->timing.refresh_rate == 30) {
 					fps_type->type= DSI_DFPS_IMMEDIATE_HFP;
 				} else {
@@ -8859,7 +8862,8 @@ int dsi_display_enable(struct dsi_display *display)
 		DSI_INFO("cont splash enabled, display enable not required\n");
 		dsi_display_panel_id_notification(display);
 
-		if (mi_get_panel_id_by_dsi_panel(display->panel) == N16_PANEL_PB)
+		if (mi_get_panel_id_by_dsi_panel(display->panel) == N16_PANEL_PB || 
+			mi_get_panel_id_by_dsi_panel(display->panel) == N16_PANEL_PC)
 			if (mi_dsi_display_read_panel_build_id(display) <= 0)
 				DSI_INFO("[%s] DSI display read panel build id failed\n", display->name);
 

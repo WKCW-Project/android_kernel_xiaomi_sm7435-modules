@@ -110,7 +110,8 @@ static void drm_mode_to_intf_timing_params(
 	display = mi_get_primary_dsi_display();
 	if (display && (mi_get_panel_id_by_dsi_panel(display->panel) == M16T_PANEL_PA ||
 		mi_get_panel_id_by_dsi_panel(display->panel) == N16_PANEL_PA ||
-		mi_get_panel_id_by_dsi_panel(display->panel) == N16_PANEL_PB)) {
+		mi_get_panel_id_by_dsi_panel(display->panel) == N16_PANEL_PB ||
+		mi_get_panel_id_by_dsi_panel(display->panel) == N16_PANEL_PC)) {
 		timing->underflow_clr = 0;
 	} else{
 		timing->underflow_clr = 0xff;

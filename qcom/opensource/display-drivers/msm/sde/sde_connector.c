@@ -1218,7 +1218,8 @@ void sde_connector_helper_bridge_disable(struct drm_connector *connector)
 	}
 	if(display && display->panel && c_conn->connector_type == DRM_MODE_CONNECTOR_DSI
 		&& (mi_get_panel_id_by_dsi_panel(display->panel) == N16_PANEL_PA
-		|| mi_get_panel_id_by_dsi_panel(display->panel) == N16_PANEL_PB)){
+		|| mi_get_panel_id_by_dsi_panel(display->panel) == N16_PANEL_PB
+		|| mi_get_panel_id_by_dsi_panel(display->panel) == N16_PANEL_PC)){
 		memset(&c_conn->mi_layer_state.layer_flags, 0, sizeof(c_conn->mi_layer_state.layer_flags));
 	}
 	/* Disable ESD thread */

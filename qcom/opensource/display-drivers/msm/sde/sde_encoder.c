@@ -4751,7 +4751,8 @@ int sde_encoder_vid_wait_for_active(
 			(mode.vsync_end - mode.vsync_start);
 		if (display && display->panel &&
 			(mi_get_panel_id_by_dsi_panel(display->panel) == N16_PANEL_PA
-			||mi_get_panel_id_by_dsi_panel(display->panel) == N16_PANEL_PB)) {
+			||mi_get_panel_id_by_dsi_panel(display->panel) == N16_PANEL_PB
+			||mi_get_panel_id_by_dsi_panel(display->panel) == N16_PANEL_PC)) {
 			/* need to reserve more time for the following functions.
 			 */
 			active_mark_region = min_ln_cnt + mode.vdisplay / 10;
@@ -4824,10 +4825,12 @@ void sde_encoder_kickoff(struct drm_encoder *drm_enc, bool config_changed)
 
 	if (dsi_display && dsi_display->panel && sde_enc->disp_info.intf_type == DRM_MODE_CONNECTOR_DSI
 		&& (mi_get_panel_id_by_dsi_panel(dsi_display->panel) == N16_PANEL_PA
-		||mi_get_panel_id_by_dsi_panel(dsi_display->panel) == N16_PANEL_PB)
+		||mi_get_panel_id_by_dsi_panel(dsi_display->panel) == N16_PANEL_PB
+		||mi_get_panel_id_by_dsi_panel(dsi_display->panel) == N16_PANEL_PC)
 		&& (adj_mode.dsi_mode_flags & DSI_MODE_FLAG_VRR || dsi_display->panel->mi_cfg.aod_to_normal_pending)) {
 		mutex_lock(&dsi_display->panel->panel_lock);
-		if (mi_get_panel_id_by_dsi_panel(dsi_display->panel) == N16_PANEL_PB &&
+		if ((mi_get_panel_id_by_dsi_panel(dsi_display->panel) == N16_PANEL_PB ||
+			(mi_get_panel_id_by_dsi_panel(dsi_display->panel) == N16_PANEL_PC )) &&
 			dsi_display->panel->mi_cfg.aod_to_normal_pending) {
 			rc = mi_dsi_panel_aod_to_normal_optimize_locked(dsi_display->panel, true);
 			if (rc != -EAGAIN)

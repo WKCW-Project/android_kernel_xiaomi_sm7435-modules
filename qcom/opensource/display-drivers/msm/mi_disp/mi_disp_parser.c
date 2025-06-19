@@ -142,7 +142,8 @@ static void mi_dsi_panel_parse_lhbm_config(struct dsi_panel *panel) {
       mi_get_panel_id(panel->mi_cfg.mi_panel_id) == L9S_PANEL_PB ||
       mi_get_panel_id(panel->mi_cfg.mi_panel_id) == M11A_PANEL_PA ||
       mi_get_panel_id(panel->mi_cfg.mi_panel_id) == N16_PANEL_PA ||
-      mi_get_panel_id(panel->mi_cfg.mi_panel_id) == N16_PANEL_PB) {
+      mi_get_panel_id(panel->mi_cfg.mi_panel_id) == N16_PANEL_PB ||
+      mi_get_panel_id(panel->mi_cfg.mi_panel_id) == N16_PANEL_PC) {
     lhbm_ptr = qcom_smem_get(QCOM_SMEM_HOST_ANY, SMEM_SW_DISPLAY_LHBM_TABLE,
                              &item_size);
     if (!IS_ERR(lhbm_ptr) && item_size > 0) {

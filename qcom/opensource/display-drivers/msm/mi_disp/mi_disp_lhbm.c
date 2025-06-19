@@ -370,7 +370,8 @@ int mi_disp_lhbm_aod_to_normal_optimize(struct dsi_display *display,
     return 0;
 
   /* Panel normal On, does not need to do aod to normal optimize */
-  if (mi_get_panel_id(display->panel->mi_cfg.mi_panel_id) == N16_PANEL_PB ||
+  if (mi_get_panel_id(display->panel->mi_cfg.mi_panel_id) == N16_PANEL_PC ||
+      mi_get_panel_id(display->panel->mi_cfg.mi_panel_id) == N16_PANEL_PB ||
       mi_get_panel_id(display->panel->mi_cfg.mi_panel_id) == N16_PANEL_PA) {
     if (display->panel->power_mode == SDE_MODE_DPMS_ON) {
       return 0;
@@ -428,8 +429,10 @@ static int mi_disp_lhbm_fod_thread_fn(void *arg) {
 
     if ((mi_get_panel_id_by_dsi_panel(lhbm_fod->display->panel) ==
              N16_PANEL_PA ||
+        mi_get_panel_id_by_dsi_panel(lhbm_fod->display->panel) ==
+             N16_PANEL_PB ||
          mi_get_panel_id_by_dsi_panel(lhbm_fod->display->panel) ==
-             N16_PANEL_PB) &&
+             N16_PANEL_PC) &&
         is_aod_and_panel_initialized(lhbm_fod->display->panel)) {
       /* Notify switch to fod fps */
       if (lhbm_setting_event.lhbm_value !=

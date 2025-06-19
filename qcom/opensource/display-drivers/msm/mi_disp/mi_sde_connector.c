@@ -225,7 +225,8 @@ static int mi_sde_connector_update_aod_status(struct drm_connector *connector,
   if (connector->connector_type == DRM_MODE_CONNECTOR_DSI) {
     display = (struct dsi_display *)c_conn->display;
     if (display) {
-      if (mi_get_panel_id(display->panel->mi_cfg.mi_panel_id) == N16_PANEL_PB ||
+      if (mi_get_panel_id(display->panel->mi_cfg.mi_panel_id) == N16_PANEL_PC ||
+          mi_get_panel_id(display->panel->mi_cfg.mi_panel_id) == N16_PANEL_PB ||
           mi_get_panel_id(display->panel->mi_cfg.mi_panel_id) == N16_PANEL_PA) {
         if (aod_status_restore != is_aod_exit && is_aod_exit &&
             (c_conn->lp_mode == SDE_MODE_DPMS_LP1 ||
@@ -372,7 +373,8 @@ int mi_sde_connector_update_layer_state(struct drm_connector *connector,
     if (connector->connector_type == DRM_MODE_CONNECTOR_DSI) {
       display = (struct dsi_display *)c_conn->display;
       if (display && mi_disp_lhbm_fod_enabled(display->panel)) {
-        if (mi_get_panel_id_by_dsi_panel(display->panel) == N16_PANEL_PB &&
+        if ((mi_get_panel_id_by_dsi_panel(display->panel) == N16_PANEL_PB ||
+            mi_get_panel_id_by_dsi_panel(display->panel) == N16_PANEL_PC) &&
             cur_flags.fod_anim_flag == true) {
           display->panel->mi_cfg.aod_to_normal_pending = true;
         } else {
