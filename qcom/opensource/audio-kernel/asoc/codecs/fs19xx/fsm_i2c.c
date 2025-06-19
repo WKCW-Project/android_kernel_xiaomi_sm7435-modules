@@ -564,14 +564,14 @@ static int fsm_i2c_probe(struct i2c_client *i2c,
 	return 0;
 }
 
-static void fsm_i2c_remove(struct i2c_client *i2c)
+static int fsm_i2c_remove(struct i2c_client *i2c)
 {
 	fsm_dev_t *fsm_dev = i2c_get_clientdata(i2c);
 
 	pr_debug("enter");
 	if (fsm_dev == NULL) {
 		pr_err("bad parameter");
-		return;
+		return -EINVAL;
 	}
 	if (fsm_dev->fsm_wq) {
 		cancel_delayed_work_sync(&fsm_dev->interrupt_work);
@@ -592,6 +592,8 @@ static void fsm_i2c_remove(struct i2c_client *i2c)
 	fsm_vddd_off();
 	devm_kfree(&i2c->dev, fsm_dev);
 	dev_info(&i2c->dev, "i2c removed");
+
+	return 0;
 }
 
 #ifndef CONFIG_FSM_MTK
